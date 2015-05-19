@@ -1,0 +1,782 @@
+<html>
+    <head>
+        <title>LED Clock by Elektordi</title>
+        <style>
+        
+            body {
+                background-color: black;
+            }
+            
+            .clock {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            /* Chiffre */
+            .digit {
+                position: absolute;
+            }
+            .digit:nth-child(1) {
+                left: -120px;
+            }
+            .digit:nth-child(2) {
+                left: -50px;
+            }
+            .digit:nth-child(4) {
+                left: 50px;
+            }
+            .digit:nth-child(5) {
+                left: 120px;
+            }
+            
+            /* Ligne LED dans chiffre */
+            .digit-line {
+                position: absolute;
+            }     
+            .digit-line:nth-child(1) {
+                top: -40px;
+            }
+            .digit-line:nth-child(2) {
+                top: -30px;
+            }
+            .digit-line:nth-child(3) {
+                top: -20px;
+            }
+            .digit-line:nth-child(4) {
+                top: -10px;
+            }
+            .digit-line:nth-child(6) {
+                top: 10px;
+            }
+            .digit-line:nth-child(7) {
+                top: 20px;
+            }
+            .digit-line:nth-child(8) {
+                top: 30px;
+            }
+            .digit-line:nth-child(9) {
+                top: 40px;
+            }
+
+            /* LEDs dans ligne chiffre */
+            .digit-line :nth-child(1) {
+                left: -20px;
+            }
+            .digit-line :nth-child(2) {
+                left: -10px;
+            }
+            .digit-line :nth-child(4) {
+                left: 10px;
+            }
+            .digit-line :nth-child(5) {
+                left: 20px;
+            }
+             
+
+            /* Points centraux */
+            .dot .led:nth-child(1) {
+                top: -12px;
+            }
+            .dot .led:nth-child(2) {
+                top: 12px;
+            }
+            
+            
+            /* Cercle extérieur */
+            .circle-out .point {
+                position: absolute;
+            }
+            .circle-out .point:nth-child(2) {
+                transform:rotate(30deg);
+            }
+            .circle-out .point:nth-child(3) {
+                transform:rotate(60deg);
+            }
+            .circle-out .point:nth-child(4) {
+                transform:rotate(90deg);
+            }
+            .circle-out .point:nth-child(5) {
+                transform:rotate(120deg);
+            }
+            .circle-out .point:nth-child(6) {
+                transform:rotate(150deg);
+            }
+            .circle-out .point:nth-child(7) {
+                transform:rotate(180deg);
+            }
+            .circle-out .point:nth-child(8) {
+                transform:rotate(210deg);
+            }
+            .circle-out .point:nth-child(9) {
+                transform:rotate(240deg);
+            }
+            .circle-out .point:nth-child(10) {
+                transform:rotate(270deg);
+            }
+            .circle-out .point:nth-child(11) {
+                transform:rotate(300deg);
+            }
+            .circle-out .point:nth-child(12) {
+                transform:rotate(330deg);
+            }
+            .circle-out .point .led {
+                top: -215px;
+            }
+            
+            /* Cercle intérieur */
+            .circle-in .point {
+                position: absolute;
+            }
+            .circle-in .point:nth-child(2) {
+                transform:rotate(6deg);
+            }
+            .circle-in .point:nth-child(3) {
+                transform:rotate(12deg);
+            }
+            .circle-in .point:nth-child(4) {
+                transform:rotate(18deg);
+            }
+            .circle-in .point:nth-child(5) {
+                transform:rotate(24deg);
+            }
+            .circle-in .point:nth-child(6) {
+                transform:rotate(30deg);
+            }
+            .circle-in .point:nth-child(7) {
+                transform:rotate(36deg);
+            }
+            .circle-in .point:nth-child(8) {
+                transform:rotate(42deg);
+            }
+            .circle-in .point:nth-child(9) {
+                transform:rotate(48deg);
+            }
+            .circle-in .point:nth-child(10) {
+                transform:rotate(54deg);
+            }
+            .circle-in .point:nth-child(11) {
+                transform:rotate(60deg);
+            }
+            .circle-in .point:nth-child(12) {
+                transform:rotate(66deg);
+            }
+            .circle-in .point:nth-child(13) {
+                transform:rotate(72deg);
+            }
+            .circle-in .point:nth-child(14) {
+                transform:rotate(78deg);
+            }
+            .circle-in .point:nth-child(15) {
+                transform:rotate(84deg);
+            }
+            .circle-in .point:nth-child(16) {
+                transform:rotate(90deg);
+            }
+            .circle-in .point:nth-child(17) {
+                transform:rotate(96deg);
+            }
+            .circle-in .point:nth-child(18) {
+                transform:rotate(102deg);
+            }
+            .circle-in .point:nth-child(19) {
+                transform:rotate(108deg);
+            }
+            .circle-in .point:nth-child(20) {
+                transform:rotate(114deg);
+            }
+            .circle-in .point:nth-child(21) {
+                transform:rotate(120deg);
+            }
+            .circle-in .point:nth-child(22) {
+                transform:rotate(126deg);
+            }
+            .circle-in .point:nth-child(23) {
+                transform:rotate(132deg);
+            }
+            .circle-in .point:nth-child(24) {
+                transform:rotate(138deg);
+            }
+            .circle-in .point:nth-child(25) {
+                transform:rotate(144deg);
+            }
+            .circle-in .point:nth-child(26) {
+                transform:rotate(150deg);
+            }
+            .circle-in .point:nth-child(27) {
+                transform:rotate(156deg);
+            }
+            .circle-in .point:nth-child(28) {
+                transform:rotate(162deg);
+            }
+            .circle-in .point:nth-child(29) {
+                transform:rotate(168deg);
+            }
+            .circle-in .point:nth-child(30) {
+                transform:rotate(174deg);
+            }
+            .circle-in .point:nth-child(31) {
+                transform:rotate(180deg);
+            }
+            .circle-in .point:nth-child(32) {
+                transform:rotate(186deg);
+            }
+            .circle-in .point:nth-child(33) {
+                transform:rotate(192deg);
+            }
+            .circle-in .point:nth-child(34) {
+                transform:rotate(198deg);
+            }
+            .circle-in .point:nth-child(35) {
+                transform:rotate(204deg);
+            }
+            .circle-in .point:nth-child(36) {
+                transform:rotate(210deg);
+            }
+            .circle-in .point:nth-child(37) {
+                transform:rotate(216deg);
+            }
+            .circle-in .point:nth-child(38) {
+                transform:rotate(222deg);
+            }
+            .circle-in .point:nth-child(39) {
+                transform:rotate(228deg);
+            }
+            .circle-in .point:nth-child(40) {
+                transform:rotate(234deg);
+            }
+            .circle-in .point:nth-child(41) {
+                transform:rotate(240deg);
+            }
+            .circle-in .point:nth-child(42) {
+                transform:rotate(246deg);
+            }
+            .circle-in .point:nth-child(43) {
+                transform:rotate(252deg);
+            }
+            .circle-in .point:nth-child(44) {
+                transform:rotate(258deg);
+            }
+            .circle-in .point:nth-child(45) {
+                transform:rotate(264deg);
+            }
+            .circle-in .point:nth-child(46) {
+                transform:rotate(270deg);
+            }
+            .circle-in .point:nth-child(47) {
+                transform:rotate(276deg);
+            }
+            .circle-in .point:nth-child(48) {
+                transform:rotate(282deg);
+            }
+            .circle-in .point:nth-child(49) {
+                transform:rotate(288deg);
+            }
+            .circle-in .point:nth-child(50) {
+                transform:rotate(294deg);
+            }
+            .circle-in .point:nth-child(51) {
+                transform:rotate(300deg);
+            }
+            .circle-in .point:nth-child(52) {
+                transform:rotate(306deg);
+            }
+            .circle-in .point:nth-child(53) {
+                transform:rotate(312deg);
+            }
+            .circle-in .point:nth-child(54) {
+                transform:rotate(318deg);
+            }
+            .circle-in .point:nth-child(55) {
+                transform:rotate(324deg);
+            }
+            .circle-in .point:nth-child(56) {
+                transform:rotate(330deg);
+            }
+            .circle-in .point:nth-child(57) {
+                transform:rotate(336deg);
+            }
+            .circle-in .point:nth-child(58) {
+                transform:rotate(342deg);
+            }
+            .circle-in .point:nth-child(59) {
+                transform:rotate(348deg);
+            }
+            .circle-in .point:nth-child(60) {
+                transform:rotate(354deg);
+            }
+            .circle-in .point .led {
+                top: -200px;
+            }
+            
+            
+            /* LEDs */
+            .led {
+                position: absolute;
+                border-radius: 50%;
+                width: 7px;
+                height: 7px;
+            }
+            .digits .led {
+                background-color: red;
+            }
+            .circle-out .led {
+                background-color: red;
+            }
+            .circle-in .led {
+                background-color: red;
+            }
+            
+            .space {
+                position: absolute;
+                width: 7px;
+                height: 7px;
+            }
+            
+            .off {
+                background-color: #200000 !important;
+            }
+        </style>
+        <script>
+
+            var str_h = prompt("Heure ?");
+            var str_m = prompt("Minute ?");
+        
+            var now = new Date();
+            var target = new Date(now.getFullYear(),now.getMonth(),now.getDate(),str_h,str_m);
+            alert(target);
+            var flipflap = 0;
+            
+            var seg = [
+                [1,0,1,1,1,1,1], // 0
+                [0,0,0,0,1,0,1], // 1
+                [1,1,1,0,1,1,0], // 2
+                [1,1,1,0,1,0,1], // 3
+                [0,1,0,1,1,0,1], // 4
+                [1,1,1,1,0,0,1], // 5
+                [1,1,1,1,0,1,1], // 6
+                [1,0,0,0,1,0,1], // 7
+                [1,1,1,1,1,1,1], // 8
+                [1,1,1,1,1,0,1], // 9
+            ];
+            
+            function digit(id, val) {
+                var element = document.getElementById("digit"+id);
+                var s = seg[val];
+                for (var i = 0; i < element.childNodes.length; i++) {
+                    if (element.childNodes[i].tagName == "DIV") {
+                        var line = element.childNodes[i];
+                        for (var j = 0; j < line.childNodes.length; j++) {
+                            if (line.childNodes[j].tagName == "DIV") {
+                                var node = line.childNodes[j];
+                                if(node.className=="space") continue;
+                                var digit = node.attributes['digit'].value-1;
+                                if(s[digit])
+                                    node.classList.remove("off");
+                                else
+                                    node.classList.add("off");
+
+                            }        
+                        }
+
+                    }        
+                }
+            }
+            
+            function circle(val) {
+                var element = document.getElementById("circlein");
+                var count = -2;
+                for (var i = 0; i < element.childNodes.length; i++) {
+                    if (element.childNodes[i].className == "point") {
+                        count++;
+                        var p = element.childNodes[i];
+                        var node = p.childNodes[0];
+                        if(val>count)
+                            node.classList.remove("off");
+                        else
+                            node.classList.add("off");
+                    }        
+                }
+            }
+        
+            function tick() {
+                now = new Date();
+                var diff = Math.floor((target.getTime() - now.getTime())/1000);
+                if(diff<0) diff=0;
+                var secs = diff%60;
+
+                digit(1,Math.floor(diff/600)%10);
+                digit(2,Math.floor(diff/60)%10);
+                digit(3,Math.floor(secs/10)%10);
+                digit(4,secs%10);
+                circle(secs);
+            }
+            
+            function blink() {
+                flipflap = 1 - flipflap;
+                var element = document.getElementById("dots");
+                for (var i = 0; i < element.childNodes.length; i++) {
+                    if (element.childNodes[i].tagName == "DIV") {
+                        var node = element.childNodes[i];
+                        if(flipflap)
+                            node.classList.add("off");
+                        else
+                            node.classList.remove("off");
+
+                    }        
+                }
+            }
+        
+            window.setInterval("tick()",1000);
+            window.setInterval("blink()",500);
+        
+        </script>
+    </head>
+    <body>
+        <div class="clock">
+            <div class="digits">
+                <div class="digit" id="digit1">
+                    <div class="digit-line">
+                        <div class="space"></div>
+                        <div class="led" digit="1"></div>
+                        <div class="led" digit="1"></div>
+                        <div class="led" digit="1"></div>
+                        <div class="space"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="4"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="5"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="4"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="5"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="4"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="5"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="space"></div>
+                        <div class="led" digit="2"></div>
+                        <div class="led" digit="2"></div>
+                        <div class="led" digit="2"></div>
+                        <div class="space"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="6"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="7"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="6"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="7"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="6"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="7"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="space"></div>
+                        <div class="led" digit="3"></div>
+                        <div class="led" digit="3"></div>
+                        <div class="led" digit="3"></div>
+                        <div class="space"></div>
+                    </div>
+                </div>
+                <div class="digit" id="digit2">
+                    <div class="digit-line">
+                        <div class="space"></div>
+                        <div class="led" digit="1"></div>
+                        <div class="led" digit="1"></div>
+                        <div class="led" digit="1"></div>
+                        <div class="space"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="4"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="5"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="4"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="5"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="4"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="5"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="space"></div>
+                        <div class="led" digit="2"></div>
+                        <div class="led" digit="2"></div>
+                        <div class="led" digit="2"></div>
+                        <div class="space"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="6"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="7"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="6"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="7"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="6"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="7"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="space"></div>
+                        <div class="led" digit="3"></div>
+                        <div class="led" digit="3"></div>
+                        <div class="led" digit="3"></div>
+                        <div class="space"></div>
+                    </div>
+                </div>
+                <div class="dot" id="dots">
+                    <div class="led"></div>
+                    <div class="led"></div>
+                </div>
+                <div class="digit" id="digit3">
+                    <div class="digit-line">
+                        <div class="space"></div>
+                        <div class="led" digit="1"></div>
+                        <div class="led" digit="1"></div>
+                        <div class="led" digit="1"></div>
+                        <div class="space"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="4"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="5"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="4"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="5"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="4"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="5"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="space"></div>
+                        <div class="led" digit="2"></div>
+                        <div class="led" digit="2"></div>
+                        <div class="led" digit="2"></div>
+                        <div class="space"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="6"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="7"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="6"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="7"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="6"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="7"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="space"></div>
+                        <div class="led" digit="3"></div>
+                        <div class="led" digit="3"></div>
+                        <div class="led" digit="3"></div>
+                        <div class="space"></div>
+                    </div>
+                </div>
+                <div class="digit" id="digit4">
+                    <div class="digit-line">
+                        <div class="space"></div>
+                        <div class="led" digit="1"></div>
+                        <div class="led" digit="1"></div>
+                        <div class="led" digit="1"></div>
+                        <div class="space"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="4"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="5"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="4"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="5"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="4"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="5"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="space"></div>
+                        <div class="led" digit="2"></div>
+                        <div class="led" digit="2"></div>
+                        <div class="led" digit="2"></div>
+                        <div class="space"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="6"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="7"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="6"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="7"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="led" digit="6"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="space"></div>
+                        <div class="led" digit="7"></div>
+                    </div>
+                    <div class="digit-line">
+                        <div class="space"></div>
+                        <div class="led" digit="3"></div>
+                        <div class="led" digit="3"></div>
+                        <div class="led" digit="3"></div>
+                        <div class="space"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="circle-out" id="circleout">
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>               
+            </div>
+            <div class="circle-in" id="circlein">
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+                <div class="point"><div class="led"></div></div>
+            </div>
+        </div>
+    </body>
+</html>
