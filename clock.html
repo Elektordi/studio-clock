@@ -338,14 +338,21 @@
                 background-color: #200000 !important;
             }
         </style>
-        <script>
+        <script type="text/javascript">
 
-            var str_h = prompt("Heure ?");
-            var str_m = prompt("Minute ?");
+            var query = window.location.search.substring(1);
+            if(query == "") {
+                var str_h = prompt("Heure ?");
+                var str_m = prompt("Minute ?");
+            } else {
+                var url = query.split(":");
+                var str_h = url[0];
+                var str_m = url[1];
+            }
         
             var now = new Date();
             var target = new Date(now.getFullYear(),now.getMonth(),now.getDate(),str_h,str_m);
-            alert(target);
+            //alert(target);
             var flipflap = 0;
             
             var seg = [
